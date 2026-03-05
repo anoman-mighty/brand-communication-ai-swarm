@@ -1,49 +1,49 @@
 #!/bin/bash
-# Brand Communication AI Swarm - 通用加载器
-# 兼容：OpenClaw, EasyClaw, OpenAI, Claude, Manus
+# Brand Communication AI Swarm - Universal Loader
+# Compatible with: OpenClaw, EasyClaw, OpenAI, Claude, Manus
 # Powered by OpenClaw
 
 set -e
 
-echo "🐝 Brand Communication AI Swarm 通用加载器"
-echo "=========================================="
+echo "🐝 Brand Communication AI Swarm Universal Loader"
+echo "================================================"
 echo "Powered by OpenClaw"
 echo ""
 
-# 颜色定义
+# Color definitions
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# 检测当前环境
+# Detect current environment
 detect_platform() {
-    echo "🔍 检测运行环境..."
+    echo "🔍 Detecting environment..."
     
-    # 检测 OpenClaw/EasyClaw
+    # Detect OpenClaw/EasyClaw
     if command -v openclaw &> /dev/null; then
         PLATFORM="openclaw"
         WORKSPACE_DIR="${OPENCLAW_WORKSPACE:-$HOME/.openclaw/workspace}"
-        echo -e "${GREEN}✓ 检测到 OpenClaw${NC}"
+        echo -e "${GREEN}✓ OpenClaw detected${NC}"
         return 0
     elif command -v easyclaw &> /dev/null; then
         PLATFORM="easyclaw"
         WORKSPACE_DIR="${EASYLAW_WORKSPACE:-$HOME/.easyclaw/workspace}"
-        echo -e "${GREEN}✓ 检测到 EasyClaw${NC}"
+        echo -e "${GREEN}✓ EasyClaw detected${NC}"
         return 0
     else
         PLATFORM="generic"
-        echo -e "${YELLOW}⚠️  未检测到 OpenClaw/EasyClaw${NC}"
-        echo "将使用通用模式，你可以手动复制配置到你的 AI 平台"
+        echo -e "${YELLOW}⚠️  OpenClaw/EasyClaw not detected${NC}"
+        echo "Will use generic mode. You can manually copy the config to your AI platform."
         return 1
     fi
 }
 
-# 下载配置文件
+# Download configuration file
 download_config() {
     echo ""
-    echo "📥 下载配置文件..."
+    echo "📥 Downloading configuration..."
     
     CONFIG_URL="https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/SWARM_CONFIG.md"
     TEMP_DIR=$(mktemp -d)
@@ -54,37 +54,37 @@ download_config() {
     elif command -v wget &> /dev/null; then
         wget -q "$CONFIG_URL" -O "$CONFIG_FILE"
     else
-        echo -e "${RED}❌ 错误：需要 curl 或 wget${NC}"
+        echo -e "${RED}❌ Error: curl or wget required${NC}"
         exit 1
     fi
     
     if [ -f "$CONFIG_FILE" ]; then
-        echo -e "${GREEN}✓ 配置文件下载成功${NC}"
+        echo -e "${GREEN}✓ Configuration downloaded successfully${NC}"
     else
-        echo -e "${RED}❌ 配置文件下载失败${NC}"
+        echo -e "${RED}❌ Configuration download failed${NC}"
         exit 1
     fi
 }
 
-# 安装到 OpenClaw/EasyClaw
+# Install to OpenClaw/EasyClaw
 install_to_claw() {
     echo ""
-    echo "📦 安装到 $PLATFORM..."
+    echo "📦 Installing to $PLATFORM..."
     
-    # 备份现有配置
+    # Backup existing config
     if [ -f "$WORKSPACE_DIR/AGENTS.md" ]; then
-        echo -e "${YELLOW}⚠️  备份现有配置...${NC}"
+        echo -e "${YELLOW}⚠️  Backing up existing config...${NC}"
         cp "$WORKSPACE_DIR/AGENTS.md" "$WORKSPACE_DIR/AGENTS.md.backup.$(date +%Y%m%d%H%M%S)"
-        echo -e "${GREEN}✓ 备份完成${NC}"
+        echo -e "${GREEN}✓ Backup completed${NC}"
     fi
     
-    # 复制配置文件
+    # Copy configuration file
     cp "$CONFIG_FILE" "$WORKSPACE_DIR/AGENTS.md"
-    echo -e "${GREEN}✓ AGENTS.md 已安装${NC}"
+    echo -e "${GREEN}✓ AGENTS.md installed${NC}"
     
-    # 创建工作区目录
+    # Create workspace directories
     echo ""
-    echo "📂 创建 Agent 工作区..."
+    echo "📂 Creating Agent workspaces..."
     AGENTS=("chief" "creator" "editor" "librarian" "reporter" "researcher" "spy" "strategist" "inspector" "computer-use" "browser-use")
     
     for agent in "${AGENTS[@]}"; do
@@ -92,15 +92,15 @@ install_to_claw() {
         echo -e "  ${GREEN}✓${NC} workspace-$agent"
     done
     
-    # 显示欢迎词（根据系统语言自动选择中文/英文）
+    # Display welcome message (auto-detect language)
     echo ""
     
-    # 检测语言并显示对应欢迎词
+    # Detect language and show welcome
     LANG_DETECT="${LANG:-en}"
     if [[ "$LANG_DETECT" =~ ^zh(_CN|_TW|_HK|_SG)? ]] || \
        [[ "$LC_ALL" =~ ^zh ]] || \
        [[ "$LC_MESSAGES" =~ ^zh ]]; then
-        # 中文欢迎词
+        # Chinese welcome
         cat << 'WELCOME_EOF'
 
 🎉 Brand Communication AI Swarm 安装成功！
@@ -143,7 +143,7 @@ install_to_claw() {
 
 WELCOME_EOF
     else
-        # 英文欢迎词
+        # English welcome
         cat << 'WELCOME_EOF'
 
 🎉 Brand Communication AI Swarm Installed Successfully!
@@ -190,13 +190,13 @@ Enjoy using it!
 WELCOME_EOF
     fi
     
-    # 提示重启
+    # Prompt to restart
     echo ""
-    echo -e "${GREEN}✅ 安装完成！请按上方指引开始使用${NC}"
+    echo -e "${GREEN}✅ Installation complete! Follow the guide above to start using${NC}"
     echo ""
     
-    # 可选：自动重启
-    read -p "是否现在重启 $PLATFORM? (y/n) " -n 1 -r
+    # Optional: auto restart
+    read -p "Restart $PLATFORM now? (y/n) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         if [ "$PLATFORM" == "openclaw" ]; then
@@ -207,48 +207,48 @@ WELCOME_EOF
     fi
 }
 
-# 通用模式（无 OpenClaw/EasyClaw）
+# Generic mode (no OpenClaw/EasyClaw)
 generic_mode() {
     echo ""
-    echo "📋 通用模式"
+    echo "📋 Generic Mode"
     echo ""
-    echo "由于未检测到 OpenClaw/EasyClaw，我们提供以下使用方式："
+    echo "OpenClaw/EasyClaw not detected. Here are your options:"
     echo ""
-    echo -e "${BLUE}方式1：URL 加载（推荐）${NC}"
-    echo "如果你使用 Kimi、智谱清言、通义千问等支持长上下文的平台："
+    echo -e "${BLUE}Option 1: URL Loading (Recommended)${NC}"
+    echo "If you're using Kimi, Zhipu Qingyan, Tongyi Qianwen, or other platforms with long context support:"
     echo ""
-    echo "  请读取 https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/SWARM_CONFIG.md"
-    echo "  并按其中的配置初始化 Brand Communication AI Swarm 集群。"
+    echo "  Please read https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/SWARM_CONFIG.md"
+    echo "  and initialize the Brand Communication AI Swarm cluster."
     echo ""
-    echo -e "${YELLOW}注意：豆包、元宝、文心一言等对话工具不支持多 Agent 协作${NC}"
-    echo "      如需使用，请手动复制单个 Agent 的 Prompt"
+    echo -e "${YELLOW}Note: Chat-only tools like Doubao, Yuanbao, Wenxin Yiyan don't support multi-agent collaboration${NC}"
+    echo "      For these, manually copy individual Agent prompts."
     echo ""
-    echo -e "${BLUE}方式2：手动复制${NC}"
-    echo "配置文件已下载到：$CONFIG_FILE"
-    echo "你可以复制内容到支持 Agent 功能的 AI 平台"
+    echo -e "${BLUE}Option 2: Manual Copy${NC}"
+    echo "Configuration file downloaded to: $CONFIG_FILE"
+    echo "You can copy the content to your AI platform"
     echo ""
-    echo -e "${BLUE}方式3：查看详细指南${NC}"
-    echo "访问 GitHub 了解各平台配置方法："
+    echo -e "${BLUE}Option 3: View Detailed Guide${NC}"
+    echo "Visit GitHub for platform-specific setup:"
     echo "  https://github.com/anoman-mighty/brand-communication-ai-swarm/tree/main/agents/"
     echo ""
 }
 
-# 清理
+# Cleanup
 cleanup() {
     if [ -d "$TEMP_DIR" ]; then
         rm -rf "$TEMP_DIR"
     fi
 }
 
-# 主程序
+# Main program
 main() {
-    # 设置清理钩子
+    # Set cleanup trap
     trap cleanup EXIT
     
-    # 下载配置
+    # Download config
     download_config
     
-    # 检测平台并安装
+    # Detect platform and install
     if detect_platform; then
         install_to_claw
     else
@@ -256,5 +256,5 @@ main() {
     fi
 }
 
-# 运行
+# Run
 main
