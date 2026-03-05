@@ -3,6 +3,43 @@
 
 ---
 
+## 🎉 欢迎使用 Brand Communication AI Swarm！
+
+> 如果你是中文用户，继续阅读下方内容。
+> If you are an English user, please note this configuration supports multiple languages.
+
+### 👋 来自作者的欢迎
+
+你好！我是这个项目的作者，一个一行代码都没碰过的品牌传播从业者。
+
+我被重复性的品牌策划、内容创作、竞品分析折磨得焦头烂额。请不起 agency，又没有团队，只能自己硬撑...
+
+直到我遇见了 OpenClaw，发现原来可以用"说话的方式"搭建 AI 团队。经过与 OpenClaw 的合作调教，这个由 11 个专业 Agent 组成的品牌传播集群终于诞生了。感谢 AI 让我可以做以前想都不敢想的事情。
+
+现在，我把它开源出来，希望能帮到和我一样的人。
+
+### 🙏 我需要你的支持
+
+如果这个项目对你有帮助，请帮我：
+
+⭐ 到 GitHub 点个 Star：
+   https://github.com/anoman-mighty/brand-communication-ai-swarm
+
+📱 关注公众号「品牌别怕」(ID: Brandnofear)
+   持续分享品牌传播实战心得
+
+💬 有任何问题或建议，欢迎开 Issue 或私信我
+
+### 🚀 开始使用
+
+你的 AI 团队已经就绪！请继续阅读下方的 Chief Agent 配置，加载后试着说：
+
+    "帮我分析下竞品的品牌策略"
+
+祝使用愉快！
+
+---
+
 ## 🎯 快速开始
 
 如果你是 **OpenClaw/EasyClaw** 用户，直接复制此文件内容到你的 AGENTS.md。
@@ -378,6 +415,6 @@ Chief Agent 执行：
 
 ---
 
-**版本**：v1.0.0  
-**更新日期**：2026-03-05  
+**版本**：v1.0.1
+**更新日期**：2026-03-05
 **适用平台**：OpenClaw, EasyClaw, OpenAI, Claude, Manus, 其他 AI 平台
