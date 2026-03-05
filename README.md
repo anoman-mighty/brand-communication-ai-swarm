@@ -3,6 +3,7 @@
 > **English** | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md)
 
 > Universal Multi-Agent System for Brand Communication
+> 跨平台品牌传播多智能体系统
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Powered by OpenClaw](https://img.shields.io/badge/Powered%20by-OpenClaw-purple.svg)](https://github.com/cfmind/openclaw)
@@ -10,28 +11,33 @@
 
 ---
 
-## 🚀 Quick Start (One Line)
+## 🚀 Quick Start
 
-### Method 1: Direct URL Loading (Recommended)
-
-Copy this prompt and send to your AI Agent:
+**Copy and send to your AI Agent:**
 
 ```
-Please read https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/SWARM_CONFIG.md and initialize the Brand Communication AI Swarm cluster according to its configuration.
+Please detect your operating system, then execute the corresponding installation command:
+- Linux/Mac: curl -fsSL https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.sh | bash
+- Windows: iwr -useb https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.ps1 | iex
 ```
 
-### Method 2: Script Installation
+**Or run directly in your terminal:**
 
+### Mac / Linux / WSL
 ```bash
-# Download and install
 curl -fsSL https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.sh | bash
 ```
 
-### Method 3: Manual Copy
+### Windows (PowerShell)
+```powershell
+iwr -useb https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.ps1 | iex
+```
 
-1. Open [SWARM_CONFIG.md](https://github.com/anoman-mighty/brand-communication-ai-swarm/blob/main/SWARM_CONFIG.md)
-2. Copy all content
-3. Paste to your AI platform
+**This will:**
+- Download and install the configuration
+- Display the author welcome message (auto-detect language)
+- Set up all 12 agents automatically (including Deputy Chief backup)
+- Create checkpoint gates for quality control
 
 ---
 
@@ -39,48 +45,74 @@ curl -fsSL https://raw.githubusercontent.com/anoman-mighty/brand-communication-a
 
 ```
                     🎯 Chief Agent (Commander)
+                     + Deputy Chief (Backup)
                                    │
         ┌──────────────────────────┼──────────────────────────┐
         │                          │                          │
-   Content Studio            Brand Strategy            Operations
+   Research Team              Content Team              Ops Team
         │                          │                          │
    ┌────┴────┐               ┌─────┴─────┐               ┌────┴────┐
-   │📝Creator│               │🔬Researcher│               │💻Comp   │
-   │✏️Editor │               │🕵️Spy     │               │🌐Browser│
-   │📚Librarian               │📋Strategist               │         │
-   │📊Reporter                │🔍Inspector                │         │
-   └─────────┘               └───────────┘               └─────────┘
+   │🔬Researcher              │📝Creator  │               │💻Comp   │
+   │🕵️Spy     │               │✏️Editor   │               │🌐Browser│
+   │📋Strategist              │📚Librarian│               └─────────┘
+   │🔍Inspector               │📊Reporter │               
+   └─────────┘               └───────────┘               
 ```
 
-## 🤖 Agent List
+## 🤖 12 Agent List
 
-| Agent ID | Name | Role | Prompt Size |
-|----------|------|------|-------------|
-| `chief` | Chief Agent | Commander, task scheduling, quality control | 500+ |
-| `creator` | Creator Agent | Long-form writing, research reports, proposals | 400+ |
-| `editor` | Editor Agent | Polishing, humanizing text, style unification | 400+ |
-| `librarian` | Librarian Agent | Knowledge management, case archiving | 350+ |
-| `reporter` | Reporter Agent | Daily/weekly reports, progress sync | 350+ |
-| `researcher` | Researcher Agent | Industry research, competitor analysis | 450+ |
-| `spy` | Spy Agent | Intelligence gathering, user insights | 400+ |
-| `strategist` | Strategist Agent | Communication strategy, topic planning | 450+ |
-| `inspector` | Inspector Agent | Fact-checking, risk assessment | 400+ |
-| `computer-use` | Computer-use Agent | Computer operations, software usage | 400+ |
-| `browser-use` | Browser-use Agent | Browser automation | 400+ |
+| Agent ID | Name | Role | Feature |
+|----------|------|------|---------|
+| `chief` | Chief Agent | Commander, task scheduling, checkpoint gates | ⭐ Primary |
+| `deputy-chief` | Deputy Chief | Backup commander, overflow handler | 🔄 Backup |
+| `researcher` | Researcher | Industry research, competitor analysis | 📊 |
+| `spy` | Spy | Intelligence gathering, zero-creativity | 🕵️ |
+| `strategist` | Strategist | Communication strategy, planning | 📋 |
+| `inspector` | Inspector | Quality gatekeeper, checkpoint controller | 🔍 QC |
+| `creator` | Creator | Long-form writing, proposals | 📝 |
+| `editor` | Editor | AI-humanizing, style unification | ✏️ |
+| `librarian` | Librarian | Knowledge base, case archiving | 📚 |
+| `reporter` | Reporter | Progress sync, reporting | 📊 |
+| `computer-use` | Computer-use | Desktop automation | 💻 |
+| `browser-use` | Browser-use | Web automation | 🌐 |
 
-**Total: 11 Agents**
+**Total: 12 Agents (11 Specialists + 1 Backup Commander)**
+
+---
+
+## 🎯 Key Features
+
+### ✅ Checkpoint Gates (Stage Gates)
+Every task passes through quality checkpoints:
+- Gate 1: Research Complete → QC → Proceed/Revise
+- Gate 2: Strategy Approved → QC → Proceed/Revise
+- Gate 3: Content Complete → QC → Proceed/Revise
+- Gate 4: Final QC Pass → Deliver
+
+### 🔄 Deputy Chief Backup
+When Chief is overloaded, Deputy Chief activates to:
+- Handle overflow tasks
+- Monitor subset of agents
+- Take over if Chief unavailable
+
+### 📊 RACI Matrix
+Clear responsibility assignment:
+- **R**esponsible: Who does the work
+- **A**ccountable: Chief makes decisions
+- **C**onsulted: Who provides input
+- **I**nformed: Who stays updated
 
 ---
 
 ## 🎯 Platform Compatibility
 
-### ✅ Full Agent Support (Recommended)
+### ✅ Full Support
 
-| Platform | Type | Notes |
-|----------|------|-------|
-| **OpenClaw** | Open Source | ⭐ Native multi-agent support |
-| **EasyClaw** | Open Source | ⭐ Native multi-agent support |
-| **OpenAI GPTs** | Commercial | ⭐ Create 11 custom GPTs |
+| Platform | Type | Status |
+|----------|------|--------|
+| **OpenClaw** | Open Source | ⭐ Native multi-agent |
+| **EasyClaw** | Open Source | ⭐ Native multi-agent |
+| **OpenAI GPTs** | Commercial | ⭐ Create 12 custom GPTs |
 | **Claude Projects** | Commercial | ⭐ Project + Instructions |
 | **Manus** | Agent Platform | ⭐ Native agent architecture |
 
@@ -88,17 +120,10 @@ curl -fsSL https://raw.githubusercontent.com/anoman-mighty/brand-communication-a
 
 | Platform | Notes |
 |----------|-------|
-| **Cursor** | Use via .cursorrules |
-| **GitHub Copilot Chat** | Role instructions work, not native multi-agent |
-| **Google Gemini** | Requires manual multi-session management |
-| **Kimi** | 200k context, session isolation |
-| **Zhipu Qingyan (GLM)** | Agent center |
-| **Tongyi Qianwen (Alibaba)** | Bailian agent platform |
-| **MiniMax** | API multi-role support |
-
-### ❌ Not Supported (Chat-only Tools)
-
-Doubao, Yuanbao, Wenxin Yiyan, Xinghuo, Tiangong AI, Hailuo AI, Wanzhi, Shangliang are chat-only tools without multi-agent capabilities.
+| **Cursor** | Via .cursorrules |
+| **Kimi** | 200k context |
+| **Zhipu Qingyan** | Agent center |
+| **Tongyi Qianwen** | Bailian platform |
 
 ---
 
@@ -106,64 +131,51 @@ Doubao, Yuanbao, Wenxin Yiyan, Xinghuo, Tiangong AI, Hailuo AI, Wanzhi, Shanglia
 
 ### Prerequisites
 
-- Any AI Agent platform (OpenAI, Claude, Manus, OpenClaw, EasyClaw, etc.)
+- Any AI Agent platform
 - No Git required
-- No coding environment required
+- No coding required
 
-### Installation Steps
+### Install via Command Line
 
-#### Option 1: URL Loading (Easiest)
-
-Send to your Agent:
-
-```
-Please load Brand Communication AI Swarm config from https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/SWARM_CONFIG.md
-```
-
-#### Option 2: Script Installation
-
+**Mac/Linux:**
 ```bash
-# Auto-detect platform and configure
 curl -fsSL https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.sh | bash
 ```
 
-#### Option 3: Manual Loading
+**Windows:**
+```powershell
+iwr -useb https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.ps1 | iex
+```
 
-1. Visit [SWARM_CONFIG.md](SWARM_CONFIG.md)
-2. Copy file content
-3. Paste to your AI platform
+### Alternative: Manual Setup
+
+Copy configuration from [SWARM_CONFIG.md](SWARM_CONFIG.md)
 
 ---
 
-## 🎯 Usage Examples
+## 🎯 Workflow Examples
 
-### Example 1: Landing Page Optimization
-
-```
-User: Help me optimize our Landing Page
-
-Chief Agent auto-schedules:
-├── Researcher → Competitor analysis
-├── Strategist → Positioning strategy  
-├── Creator → Copywriting
-├── Editor → Polishing
-├── Inspector → Quality check
-└── Reporter → Archiving
-```
-
-### Example 2: Product Launch Planning
+### Landing Page Optimization (with Checkpoints)
 
 ```
-User: We're launching a new product and need full planning
+User: Optimize our Landing Page
 
-Chief Agent auto-schedules:
-├── Researcher + Spy → Market intelligence
-├── Strategist → Launch strategy + pricing
-├── [Parallel]
-│   ├── Creator → Content creation
-│   └── Editor → Style unification
-├── Inspector → Full quality check
-└── Reporter → Archiving
+Chief Agent with Checkpoint Gates:
+├─ Phase 1: Research [Gate 1]
+│  ├─ Researcher → Competitor analysis
+│  ├─ Spy → User feedback
+│  └─ Inspector → QC Review → PASS/REVISE
+├─ Phase 2: Strategy [Gate 2]
+│  ├─ Strategist → Positioning
+│  └─ Inspector → QC Review → PASS/REVISE
+├─ Phase 3: Creation [Gate 3]
+│  ├─ Creator → Copywriting
+│  ├─ Editor → Polishing
+│  └─ Inspector → QC Review → PASS/REVISE
+└─ Phase 4: Delivery [Gate 4]
+   ├─ Final QC
+   ├─ Librarian → Archive
+   └─ Reporter → Summary
 ```
 
 ---
@@ -175,50 +187,12 @@ brand-communication-ai-swarm/
 ├── README.md              # This file (English)
 ├── README.zh-CN.md        # Simplified Chinese
 ├── README.zh-TW.md        # Traditional Chinese
-├── SWARM_CONFIG.md        # Cluster core config (universal format)
-├── swarm-loader.sh        # Mac/Linux install script
-├── swarm-loader.ps1       # Windows install script
+├── SWARM_CONFIG.md        # Core config with 12 Agents
+├── swarm-loader.sh        # Mac/Linux installer
+├── swarm-loader.ps1       # Windows installer
 ├── LICENSE                # MIT License
-├── .gitignore             # Git ignore rules
 └── docs/                  # Documentation
 ```
-
----
-
-## 🛠️ Customization
-
-### Modifying Agent Roles
-
-Edit `SWARM_CONFIG.md` to modify agent descriptions and responsibilities.
-
-### Adding New Agents
-
-1. Add new agent entry in `SWARM_CONFIG.md`
-2. Update agent list in install scripts
-
----
-
-## 📚 Platform-Specific Guides
-
-### OpenClaw / EasyClaw
-
-Copy `SWARM_CONFIG.md` to workspace directly.
-
-### OpenAI GPTs
-
-1. Create 11 GPTs
-2. Paste 11 agent configurations separately
-
-### Claude Projects
-
-1. Create Project
-2. Paste Chief Agent config to Project Instructions
-3. Let Chief help create other agents
-
-### Manus
-
-1. Create 11 Agents
-2. Configure each agent's prompt separately
 
 ---
 
@@ -230,22 +204,15 @@ Issues and PRs welcome!
 
 ## 📄 License
 
-This project uses [MIT](LICENSE) License.
+[MIT](LICENSE) License.
 
 ---
 
-## 💬 Community & Support
+## 💬 Community
 
-- Questions? Open an [Issue](../../issues)
-- Ideas? Start a [Discussion](../../discussions)
-
----
-
-## 🙏 Acknowledgments
-
-Thanks to these projects and communities:
-- [OpenClaw](https://github.com/cfmind/openclaw) - Universal Agent Framework
-- All contributors and users
+- Questions? [Issues](../../issues)
+- Ideas? [Discussions](../../discussions)
+- WeChat: 品牌别怕 (Brandnofear)
 
 ---
 

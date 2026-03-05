@@ -11,161 +11,171 @@
 
 ---
 
-## 🚀 一行代码快速开始
+## 🚀 快速开始
 
-### 方法1：直接运行（推荐）
-
-复制以下提示词，直接发给你的 AI Agent：
+**复制这段话，发给你的 AI Agent：**
 
 ```
-请读取 https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/SWARM_CONFIG.md 并按其中的配置初始化 Brand Communication AI Swarm 集群。
+请检测你的操作系统，然后执行对应的安装命令：
+- Linux/Mac: curl -fsSL https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.sh | bash
+- Windows: iwr -useb https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.ps1 | iex
 ```
 
-### 方法2：本地部署
+**或在终端直接运行：**
 
+### Mac / Linux / WSL
 ```bash
-# 下载配置并运行
 curl -fsSL https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.sh | bash
 ```
 
-### 方法3：手动复制
+### Windows (PowerShell)
+```powershell
+iwr -useb https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.ps1 | iex
+```
 
-1. 打开 [SWARM_CONFIG.md](https://github.com/anoman-mighty/brand-communication-ai-swarm/blob/main/SWARM_CONFIG.md)
-2. 复制全部内容
-3. 粘贴给你的 AI Agent
+**执行后会：**
+- 自动下载并安装配置
+- 显示作者欢迎语（中英文自动检测）
+- 自动设置好 12 个 Agent（含副指挥官备份）
+- 建立检查点门控确保质量
 
 ---
 
 ## 📋 集群架构
 
 ```
-                    🎯 Chief Agent (品牌传播总指挥官)
+                    🎯 Chief Agent (总指挥官)
+                     + Deputy Chief (副指挥官备份)
                                    │
         ┌──────────────────────────┼──────────────────────────┐
         │                          │                          │
-   内容创作团队                 品牌策略团队                 操作执行团队
-   (Content Studio)          (Brand Strategy)           (Operations)
+   研究情报团队                 内容创作团队                 操作执行团队
         │                          │                          │
    ┌────┴────┐               ┌─────┴─────┐               ┌────┴────┐
-   │📝Creator│               │🔬Researcher│               │💻Comp   │
-   │✏️Editor │               │🕵️Spy     │               │🌐Browser│
-   │📚Librarian               │📋Strategist               │         │
-   │📊Reporter                │🔍Inspector                │         │
-   └─────────┘               └───────────┘               └─────────┘
+   │🔬Researcher              │📝Creator  │               │💻Comp   │
+   │🕵️Spy     │               │✏️Editor   │               │🌐Browser│
+   │📋Strategist              │📚Librarian│               └─────────┘
+   │🔍Inspector               │📊Reporter │               
+   └─────────┘               └───────────┘               
 ```
 
-## 🤖 Agent 清单
+## 🤖 12 个 Agent 清单
 
-| Agent ID | 名称 | 职责 | Prompt 字数 |
-|----------|------|------|-------------|
-| `chief` | Chief Agent | 总指挥、任务调度、质量把控 | 500+ |
-| `creator` | Creator Agent | 长文撰写、研报、方案 | 400+ |
-| `editor` | Editor Agent | 润色、去AI味、风格统一 | 400+ |
-| `librarian` | Librarian Agent | 知识库管理、案例归档 | 350+ |
-| `reporter` | Reporter Agent | 日报/周报、进度同步 | 350+ |
-| `researcher` | Researcher Agent | 行业研究、竞品分析 | 450+ |
-| `spy` | Spy Agent | 情报抓取、用户声音 | 400+ |
-| `strategist` | Strategist Agent | 传播策略、选题策划 | 450+ |
-| `inspector` | Inspector Agent | 事实核查、风险检查 | 400+ |
-| `computer-use` | Computer-use Agent | 电脑操作、软件使用 | 400+ |
-| `browser-use` | Browser-use Agent | 浏览器自动化 | 400+ |
+| Agent ID | 名称 | 职责 | 特点 |
+|----------|------|------|------|
+| `chief` | Chief Agent | 总指挥、任务调度、检查点门控 | ⭐ 核心 |
+| `deputy-chief` | Deputy Chief | 副指挥官、溢出任务处理 | 🔄 备份 |
+| `researcher` | Researcher | 行业研究、竞品分析 | 📊 |
+| `spy` | Spy | 情报抓取、零创意纯数据 | 🕵️ |
+| `strategist` | Strategist | 传播策略、节奏把控 | 📋 |
+| `inspector` | Inspector | 质量守门人、检查点控制 | 🔍 QC |
+| `creator` | Creator | 长文撰写、方案创作 | 📝 |
+| `editor` | Editor | 去AI味、风格统一 | ✏️ |
+| `librarian` | Librarian | 知识库、案例归档 | 📚 |
+| `reporter` | Reporter | 进度同步、汇报 | 📊 |
+| `computer-use` | Computer-use | 桌面自动化 | 💻 |
+| `browser-use` | Browser-use | 网页自动化 | 🌐 |
 
-**总计：11个 Agent**
+**总计：12 个 Agent（11 个专业 + 1 个备份指挥官）**
+
+---
+
+## 🎯 核心特性
+
+### ✅ 检查点门控（Stage Gates）
+每个任务都通过质量检查点：
+- 门控 1：研究完成 → QC → 通过/返工
+- 门控 2：策略确认 → QC → 通过/返工
+- 门控 3：内容完成 → QC → 通过/返工
+- 门控 4：最终质检 → 交付
+
+### 🔄 副指挥官备份
+当 Chief 负载过高时，Deputy Chief 激活：
+- 处理溢出任务
+- 监控部分 Agent
+- Chief 不可用时接管
+
+### 📊 RACI 矩阵
+清晰的责任分配：
+- **R**esponsible：谁执行
+- **A**ccountable：Chief 决策
+- **C**onsulted：谁提供意见
+- **I**nformed：谁知情
 
 ---
 
 ## 🎯 平台兼容性
 
-### ✅ 完整 Agent 支持（推荐）
+### ✅ 完整支持
 
-| 平台 | 类型 | 说明 |
+| 平台 | 类型 | 状态 |
 |------|------|------|
-| **OpenClaw** | 开源框架 | ⭐ 原生多 Agent 支持 |
-| **EasyClaw** | 开源框架 | ⭐ 原生多 Agent 支持 |
-| **OpenAI GPTs** | 商业平台 | ⭐ 创建 11 个自定义 GPT |
+| **OpenClaw** | 开源框架 | ⭐ 原生多 Agent |
+| **EasyClaw** | 开源框架 | ⭐ 原生多 Agent |
+| **OpenAI GPTs** | 商业平台 | ⭐ 创建 12 个 GPT |
 | **Claude Projects** | 商业平台 | ⭐ Project + Instructions |
-| **Manus** | 专业 Agent 平台 | ⭐ 原生 Agent 架构 |
+| **Manus** | Agent 平台 | ⭐ 原生 Agent 架构 |
 
 ### ⚠️ 有限支持
 
 | 平台 | 说明 |
 |------|------|
-| **Cursor** | 可通过 .cursorrules 使用 |
-| **GitHub Copilot Chat** | 角色指令可用，非原生多 Agent |
-| **Google Gemini** | 需手动管理多会话 |
-| **Kimi (月之暗面)** | 200k 上下文，会话隔离 |
-| **智谱清言 (GLM)** | 智能体中心 |
-| **通义千问 (阿里)** | 百炼智能体平台 |
-| **MiniMax** | API 多角色支持 |
-
-### ❌ 不支持（仅对话工具）
-
-豆包、元宝、文心一言、讯飞星火、天工 AI、海螺 AI、万知、商量等仅为对话工具，不支持多 Agent 协作。
+| **Cursor** | 通过 .cursorrules |
+| **Kimi** | 200k 上下文 |
+| **智谱清言** | 智能体中心 |
+| **通义千问** | 百炼平台 |
 
 ---
 
-## 📦 安装指南
+## 📦 安装
 
 ### 前置要求
 
-- 任意 AI Agent 平台（OpenAI、Claude、Manus、OpenClaw、EasyClaw 等）
+- 任意 AI Agent 平台
 - 无需 Git
-- 无需编程环境
+- 无需编程
 
-### 安装步骤
+### 命令行安装
 
-#### 方式一：URL 加载（最简单）
-
-直接发给你的 Agent：
-
-```
-请从 https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/SWARM_CONFIG.md 加载 Brand Communication AI Swarm 配置。
-```
-
-#### 方式二：脚本加载（自动）
-
+**Mac/Linux：**
 ```bash
-# 自动检测平台并配置
 curl -fsSL https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.sh | bash
 ```
 
-#### 方式三：手动加载（通用）
+**Windows：**
+```powershell
+iwr -useb https://raw.githubusercontent.com/anoman-mighty/brand-communication-ai-swarm/main/swarm-loader.ps1 | iex
+```
 
-1. 访问 [SWARM_CONFIG.md](SWARM_CONFIG.md)
-2. 复制文件内容
-3. 粘贴到你的 AI 平台
+### 备选：手动安装
+
+复制 [SWARM_CONFIG.md](SWARM_CONFIG.md) 的配置
 
 ---
 
-## 🎯 使用示例
+## 🎯 工作流示例
 
-### 示例1：Landing Page 优化
-
-```
-用户：帮我优化我们的 Landing Page
-
-Chief Agent 自动调度：
-├── Researcher → 竞品分析
-├── Strategist → 定位策略  
-├── Creator → 文案创作
-├── Editor → 润色优化
-├── Inspector → 质检
-└── Reporter → 归档
-```
-
-### 示例2：产品发布策划
+### Landing Page 优化（含检查点）
 
 ```
-用户：我们要发布新产品，需要完整策划
+用户：优化 Landing Page
 
-Chief Agent 自动调度：
-├── Researcher + Spy → 市场情报
-├── Strategist → 发布策略 + 定价
-├── [并行]
-│   ├── Creator → 内容创作
-│   └── Editor → 风格统一
-├── Inspector → 全面质检
-└── Reporter → 归档
+Chief Agent 带检查点门控：
+├─ 阶段 1：研究 [门控 1]
+│  ├─ Researcher → 竞品分析
+│  ├─ Spy → 用户反馈
+│  └─ Inspector → QC → 通过/返工
+├─ 阶段 2：策略 [门控 2]
+│  ├─ Strategist → 定位策略
+│  └─ Inspector → QC → 通过/返工
+├─ 阶段 3：创作 [门控 3]
+│  ├─ Creator → 文案撰写
+│  ├─ Editor → 润色优化
+│  └─ Inspector → QC → 通过/返工
+└─ 阶段 4：交付 [门控 4]
+   ├─ 最终质检
+   ├─ Librarian → 归档
+   └─ Reporter → 总结报告
 ```
 
 ---
@@ -174,57 +184,19 @@ Chief Agent 自动调度：
 
 ```
 brand-communication-ai-swarm/
-├── README.md                 # 本文件（英文）
-├── README.zh-CN.md          # 简体中文
-├── README.zh-TW.md          # 繁体中文
-├── SWARM_CONFIG.md          # 集群核心配置（通用格式）
-├── swarm-loader.sh          # Mac/Linux 安装脚本
-├── swarm-loader.ps1         # Windows 安装脚本
-├── LICENSE                  # MIT 许可证
-├── .gitignore               # Git 忽略规则
-└── docs/                    # 文档目录
+├── README.md              # 本文件（英文）
+├── README.zh-CN.md        # 简体中文
+├── README.zh-TW.md        # 繁體中文
+├── SWARM_CONFIG.md        # 核心配置（12 Agent）
+├── swarm-loader.sh        # Mac/Linux 安装脚本
+├── swarm-loader.ps1       # Windows 安装脚本
+├── LICENSE                # MIT 许可证
+└── docs/                  # 文档
 ```
 
 ---
 
-## 🛠️ 自定义配置
-
-### 修改 Agent 角色
-
-编辑 `SWARM_CONFIG.md` 文件，修改 Agent 的描述和职责。
-
-### 添加新 Agent
-
-1. 在 `SWARM_CONFIG.md` 中添加新的 Agent 条目
-2. 更新安装脚本中的 Agent 列表
-
----
-
-## 📚 平台特定指南
-
-### OpenClaw / EasyClaw
-
-直接复制 `SWARM_CONFIG.md` 到工作区即可。
-
-### OpenAI GPTs
-
-1. 创建 11 个 GPT
-2. 分别粘贴 11 个 Agent 的配置
-
-### Claude Projects
-
-1. 创建 Project
-2. 将 Chief Agent 配置粘贴到 Project Instructions
-3. 让 Chief 帮你创建其他 Agent
-
-### Manus
-
-1. 创建 11 个 Agent
-2. 分别配置每个 Agent 的 Prompt
-
----
-
-## 🤝 贡献指南
+## 🤝 贡献
 
 欢迎提交 Issue 和 PR！
 
@@ -232,22 +204,15 @@ brand-communication-ai-swarm/
 
 ## 📄 许可证
 
-本项目采用 [MIT](LICENSE) 许可证。
+[MIT](LICENSE) 许可证
 
 ---
 
-## 💬 社区与支持
+## 💬 社区
 
-- 有问题？开 [Issue](../../issues)
-- 有想法？提 [Discussion](../../discussions)
-
----
-
-## 🙏 致谢
-
-感谢以下项目和社区：
-- [OpenClaw](https://github.com/cfmind/openclaw) - 通用 Agent 框架
-- 所有贡献者和用户
+- 问题？[Issues](../../issues)
+- 想法？[Discussions](../../discussions)
+- 公众号：品牌别怕 (Brandnofear)
 
 ---
 
