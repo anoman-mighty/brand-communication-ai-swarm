@@ -1,0 +1,30 @@
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+# Temp files
+*.tmp
+*.log
+.cache/
+temp/
+# User config
+USER.md
+IDENTITY.md
+MEMORY.md
+HEARTBEAT.md
+*.backup.*
+# Workspace files
+workspace-*/
+!workspace-*/.gitkeep
+# Secrets
+.env
+.env.local
+*.key
+*.pem
+secrets/
